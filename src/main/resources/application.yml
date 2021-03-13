@@ -1,0 +1,35 @@
+server:
+  port: 10086
+  servlet:
+    context-path: /chat
+    session:
+      timeout: PT1H
+spring:
+  application:
+    name: mq-chat-engine
+  datasource:
+    hikari:
+      maximum-pool-size: 2
+  rabbitmq:
+    host: 106.15.248.104
+    port: 5672
+    username: cx
+    password: 123456
+    virtual-host: chat_host
+    #确认消息已发送到交换机exchange(开启手动确认消息)
+    publisher-confirm-type: correlated
+    #确认消息从exchange发送到queue
+    publisher-returns: true
+  redis:
+    # Redis数据库索引（默认为0）
+    database: 0
+    # 连接超时时间（毫秒）
+    timeout: 5000
+    # Redis服务器地址
+    host: 127.0.0.1
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password:
+logging:
+  config: classpath:log4j2-dev.yml

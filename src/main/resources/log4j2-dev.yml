@@ -1,0 +1,25 @@
+Appenders:
+  Console:
+    name: CONSOLE
+    target: SYSTEM_OUT
+    PatternLayout:
+      pattern: "%d %-5p %m [%t] (%c) (%F:%L) %n"
+  RollingFile:
+    - name: ROLLING_FILE
+      ignoreExceptions: false
+      fileName: /project/logs/mqChatProject.log
+      filePattern: "/project/logs/$${date:yyyy-MM}/mqChatProject-%d{yyyy-MM-dd}-%i.log.gz"
+      PatternLayout:
+        pattern: "%d %-5p %m [%t] (%c) (%F:%L) %n"
+      Policies:
+        TimeBasedTriggeringPolicy:
+          modulate: true
+          interval: 1
+      DefaultRolloverStrategy:
+        max: 1000
+Loggers:
+  Root:
+    level: info
+    AppenderRef:
+      - ref: CONSOLE
+      - ref: ROLLING_FILE
